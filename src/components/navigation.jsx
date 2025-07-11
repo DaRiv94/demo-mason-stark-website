@@ -21,7 +21,7 @@ export const Navigation = (props) => {
             Mason Stark
           </a>{" "}
         </div>
-
+ 
         <div
           className="collapse navbar-collapse"
           id="bs-example-navbar-collapse-1"
