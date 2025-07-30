@@ -1,34 +1,83 @@
-import React from "react";
+import { React, useState } from "react";
+import { BlobServiceClient } from "@azure/storage-blob";
 
 export const Project02 = (props) => {
+  const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [downloadUrl, setDownloadUrl] = useState(null);
+
+  //SAS URL for the input container
+  const inputContainerSasUrl = "https://aistestfuncstor.blob.core.windows.net/input-timecode-files?sp=cw&st=2025-07-30T16:53:13Z&se=2025-07-31T01:08:13Z&spr=https&sv=2024-11-04&sr=c&sig=qkPwBt5JhOb2geGPdDVU5UemdRpcA2pR0wGM%2FZi9i%2BY%3D";
+
+  const handleFileChange = (e) => setFile(e.target.files[0]);
+
+  const uploadFile = async () => {
+    if (!file) return;
+    setUploading(true);
+    const blobServiceClient = new BlobServiceClient(inputContainerSasUrl);
+    const containerClient = blobServiceClient.getContainerClient("");
+    const blockBlobClient = containerClient.getBlockBlobClient(file.name);
+    await blockBlobClient.uploadBrowserData(file);
+    setUploading(false);
+    // Optionally, start polling for the processed file
+    pollForProcessedFile(file.name);
+  };
+
+  // Poll your GetDownloadSAS endpoint for the processed file
+  const pollForProcessedFile = async (filename) => {
+    const maxAttempts = 20;
+    let attempts = 0;
+    while (attempts < maxAttempts) {
+      const res = await fetch(
+        `https://aistestfunctionapptools-bncfbwatfsh8gje9.eastus-01.azurewebsites.net/api/GetDownloadSAS?blobName=${filename}`
+      );
+      if (res.status === 200) {
+        const data = await res.json();
+        setDownloadUrl(data.downloadUrl);
+        break;
+      }
+      await new Promise((resolve) => setTimeout(resolve, 5000)); // wait 5 seconds
+      attempts++;
+    }
+  };
+
   return (
     <div id="project02">
       <div className="container">
         <div className="row">
           <div className="col-xs-12 col-md-6">
             {" "}
-            <img src="img/about.jpg" className="img-responsive" alt="" />{" "}
+            <img src="img/portfolio/YouTubeTimeCodeConverterIcon.png" className="img-responsive" alt="" />{" "}
           </div>
           <div className="col-xs-12 col-md-6">
             <div className="about-text">
-              <h2>Portfolio Project 02</h2>
+              <h2>YouTube Timecode Converter</h2>
               <p>{props.data ? props.data.paragraph : "loading..."}</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
+                <input id="fileInput" type="file" accept=".txt" onChange={handleFileChange} className="hidden-file-input" />
+                <label htmlFor="fileInput" className="btn btn-custom btn-lg" style={{ marginBottom: 0, marginRight: 0 }}>
+                  Choose File
+                </label>
+
+                <span className="file-name styled-file-name">{file ? file.name : "No file chosen"}</span>
+
+              </div>
+
+              <button onClick={uploadFile} disabled={uploading} className="btn btn-custom btn-lg ">
+                {uploading ? "Uploading..." : "Convert to YouTube Timecode Format"}
+              </button>
+              {downloadUrl && (
+                <a href={downloadUrl} download className="btn btn-custom btn-lg ">
+                  Download Processed File
+                </a>
+              )}
               <h3>Features</h3>
               <div className="list-style">
-                <div className="col-lg-6 col-sm-6 col-xs-12">
+                <div className="col-lg-12 col-sm-12 col-xs-12">
                   <ul>
                     {props.data
                       ? props.data.Features1.map((d, i) => (
                         <li key={`${d}-${i}`}>{d}</li>
-                      ))
-                      : "loading"}
-                  </ul>
-                </div>
-                <div className="col-lg-6 col-sm-6 col-xs-12">
-                  <ul>
-                    {props.data
-                      ? props.data.Features2.map((d, i) => (
-                        <li key={`${d}-${i}`}> {d}</li>
                       ))
                       : "loading"}
                   </ul>

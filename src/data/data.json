@@ -34,12 +34,12 @@
     ]
   },
   "Project02": {
-    "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.",
+    "paragraph": "Convert timecode from a marker export in Adobe Premiere Pro to a YouTube Timecode friendly format. This saves you time in manually creating timecode data to create chapters in YouTube Videos",
     "Features1": [
-      "Lorem ipsum dolor",
-      "Tempor incididunt",
-      "Lorem ipsum dolor",
-      "Incididunt ut labore"
+      "Save time crafting YouTube timecode data to improve videos with chapters",
+      "Uses Azure Functions for converting timecode file",
+      "Uses Azure Functions for generating download link",
+      "Uses Adobe Premiere Pro markers export for initial file"
     ],
     "Features2": [
       "Aliquip ex ea commodo",

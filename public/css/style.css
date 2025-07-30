@@ -378,9 +378,66 @@ header .intro-text {
   margin: 30px 0;
 }
 
-#project01 .btn-custom {
+#project01 .btn-custom, #project02 .btn-custom {
   margin-bottom: 30px;
 }
+
+/* FileInput */
+.hidden-file-input {
+  position: absolute;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #005fcc;
+  color: #fff;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.file-label:hover {
+  background-color: #004bb5;
+}
+
+.file-name {
+  margin-left: 1rem;
+  font-size: 0.9rem;
+  color: #333;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.styled-file-name {
+  display: inline-block;
+  font-size: 1rem;
+  color: #fff;
+  background: linear-gradient(to right, #494949 0%, #858585 100%);
+  border-radius: 20px;
+  padding: 10px 24px;
+  margin-left: 0;
+  margin-bottom: 0;
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  box-shadow: 0 0 10px rgba(99, 114, 255, 0.10);
+}
+
+
 
 /* Services Section */
 #services {
