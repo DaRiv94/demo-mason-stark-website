@@ -39,7 +39,7 @@ export const Navigation = (props) => {
             </li>
             <li>
               <a href="#project02" className="page-scroll">
-                Project 02
+                YT Timcoder
               </a>
             </li>
             <li>
