@@ -18,13 +18,13 @@
       "Lorem ipsum dolor"
     ]
   },
-    "Project01": {
-    "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sed dapibus leo nec ornare diam sedasd commodo nibh ante facilisis bibendum dolor feugiat at.",
+  "Project01": {
+    "paragraph": "Generates automated email responses to submitted Microsoft forms",
     "Features1": [
-      "Lorem ipsum dolor",
-      "Tempor incididunt",
-      "Lorem ipsum dolor",
-      "Incididunt ut labore"
+      "Microsoft Forms to collect information",
+      "Azure Logic Apps for automation workflow",
+      "Azure OpenAI for Content Generation",
+      "Microsoft Outlook for respondent responses"
     ],
     "Features2": [
       "Aliquip ex ea commodo",
