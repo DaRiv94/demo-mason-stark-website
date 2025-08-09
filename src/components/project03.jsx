@@ -7,28 +7,27 @@ export const Project03 = (props) => {
         <div className="row">
           <div className="col-xs-12 col-md-6">
             {" "}
-            <img src="img/about.jpg" className="img-responsive" alt="" />{" "}
+            <img src="img/portfolio/AIAgentReminderImage.png" className="img-responsive" alt="" />{" "}
           </div>
           <div className="col-xs-12 col-md-6">
             <div className="about-text">
-              <h2>Portfolio Project 03</h2>
+              <h2>Email Reminder Agent</h2>
               <p>{props.data ? props.data.paragraph : "loading..."}</p>
+                                            <a
+                  href="https://aca-ais-test2-agent-remin-fd.victoriousstone-3f422393.eastus2.azurecontainerapps.io"
+                  className="btn btn-custom btn-lg "
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Try It Out
+                </a>
               <h3>Features</h3>
               <div className="list-style">
-                <div className="col-lg-6 col-sm-6 col-xs-12">
+                <div className="col-lg-12 col-sm-12 col-xs-12">
                   <ul>
                     {props.data
                       ? props.data.Features1.map((d, i) => (
                           <li key={`${d}-${i}`}>{d}</li>
-                        ))
-                      : "loading"}
-                  </ul>
-                </div>
-                <div className="col-lg-6 col-sm-6 col-xs-12">
-                  <ul>
-                    {props.data
-                      ? props.data.Features2.map((d, i) => (
-                          <li key={`${d}-${i}`}> {d}</li>
                         ))
                       : "loading"}
                   </ul>
