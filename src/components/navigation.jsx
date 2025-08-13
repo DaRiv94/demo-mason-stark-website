@@ -44,7 +44,7 @@ export const Navigation = (props) => {
             </li>
             <li>
               <a href="#project03" className="page-scroll">
-                Project 03
+                Email Reminder Agent
               </a>
             </li>
             {/* <li>
