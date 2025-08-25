@@ -14,7 +14,7 @@ export const Project03 = (props) => {
               <h2>Email Reminder Agent</h2>
               <p>{props.data ? props.data.paragraph : "loading..."}</p>
               <a
-                href="https://aca-ais-demo-agent-remind-front.victoriousdune-429ab3d3.eastus.azurecontainerapps.io"
+                href="https://aca-ais-test2-agent-remin-fd.victoriousstone-3f422393.eastus2.azurecontainerapps.io"
                 className="btn btn-custom btn-lg "
                 target="_blank"
                 rel="noreferrer"
