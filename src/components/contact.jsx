@@ -15,26 +15,42 @@ export const Contact = (props) => {
     setState((prevState) => ({ ...prevState, [name]: value }));
   };
   const clearState = () => setState({ ...initialState });
-  
-  
-  const handleSubmit = (e) => {
+
+  const [loading, setLoading] = useState(false);
+  const [statusMessage, setStatusMessage] = useState('');
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(name, email, message);
-    
-    {/* replace below with your own Service ID, Template ID and Public Key from your EmailJS account */ }
-    
-    emailjs
-      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
-      .then(
-        (result) => {
-          console.log(result.text);
-          clearState();
-        },
-        (error) => {
-          console.log(error.text);
+    setLoading(true);
+    setStatusMessage('');
+
+    try {
+      const response = await fetch(
+        "https://func-ais-eus-contactme-demo-gkh5argzegeac7a3.eastus-01.azurewebsites.net/api/contactmeemailsend",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email, message })
         }
       );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setStatusMessage('✓ Email sent successfully!');
+        clearState();
+      } else {
+        setStatusMessage(`✗ Error: ${data.message || 'Failed to send email'}`);
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      setStatusMessage('✗ Error sending email. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
+
+
   return (
     <div>
       <div id="contact">
@@ -49,6 +65,18 @@ export const Contact = (props) => {
                 </p>
               </div>
               <form name="sentMessage" validate onSubmit={handleSubmit}>
+                {statusMessage && (
+                  <div style={{
+                    marginBottom: '20px',
+                    padding: '12px',
+                    borderRadius: '5px',
+                    backgroundColor: statusMessage.includes('✓') ? '#d4edda' : '#f8d7da',
+                    color: statusMessage.includes('✓') ? '#155724' : '#721c24',
+                    border: `1px solid ${statusMessage.includes('✓') ? '#c3e6cb' : '#f5c6cb'}`
+                  }}>
+                    {statusMessage}
+                  </div>
+                )}
                 <div className="row">
                   <div className="col-md-6">
                     <div className="form-group">
@@ -60,6 +88,7 @@ export const Contact = (props) => {
                         placeholder="Name"
                         required
                         onChange={handleChange}
+                        value={name}
                       />
                       <p className="help-block text-danger"></p>
                     </div>
@@ -74,6 +103,7 @@ export const Contact = (props) => {
                         placeholder="Email"
                         required
                         onChange={handleChange}
+                        value={email}
                       />
                       <p className="help-block text-danger"></p>
                     </div>
@@ -88,12 +118,13 @@ export const Contact = (props) => {
                     placeholder="Message"
                     required
                     onChange={handleChange}
+                    value={message}
                   ></textarea>
                   <p className="help-block text-danger"></p>
                 </div>
                 <div id="success"></div>
-                <button type="submit" className="btn btn-custom btn-lg">
-                  Send Message
+                <button type="submit" className="btn btn-custom btn-lg" disabled={loading}>
+                  {loading ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             </div>
@@ -153,10 +184,7 @@ export const Contact = (props) => {
       <div id="footer">
         <div className="container text-center">
           <p>
-            &copy; 2023 Issaaf Kattan React Land Page Template. Design by{" "}
-            <a href="http://www.templatewire.com" rel="nofollow">
-              TemplateWire
-            </a>
+            &copy; 2026 Mason Stark.
           </p>
         </div>
       </div>

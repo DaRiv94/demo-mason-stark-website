@@ -47,11 +47,11 @@ export const Navigation = (props) => {
                 Email Reminder Agent
               </a>
             </li>
-            {/* <li>
+            <li>
               <a href="#contact" className="page-scroll">
                 Contact
               </a>
-            </li> */}
+            </li>
           </ul>
         </div>
       </div>
