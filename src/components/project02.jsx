@@ -3,7 +3,7 @@ import { BlobServiceClient } from "@azure/storage-blob";
 
 export const Project02 = (props) => {
 
-    const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [downloadUrl, setDownloadUrl] = useState(null);
 
@@ -12,7 +12,21 @@ export const Project02 = (props) => {
 
   const handleFileChange = (e) => setFile(e.target.files[0]);
 
-  const uploadFile = async () => {
+  // ============================================
+  // DEMO MODE FILE UPLOAD HANDLER
+  // Prevents file upload when in demo mode
+  // ============================================
+  const uploadFile = async (e) => {
+    // Check if in demo mode
+    if (props.isDemoMode) {
+      props.onDemoClick(e || { preventDefault: () => {} }, 'File upload and conversion');
+      return;
+    }
+    
+    // ============================================
+    // PRODUCTION CODE (active when isDemoMode = false)
+    // This handles the actual file upload
+    // ============================================
     if (!file) return;
     setUploading(true);
     const blobServiceClient = new BlobServiceClient(inputContainerSasUrl);

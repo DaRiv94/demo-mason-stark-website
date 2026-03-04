@@ -1,6 +1,17 @@
 import React from "react";
 
 export const Project01 = (props) => {
+  // ============================================
+  // DEMO MODE BUTTON HANDLER
+  // Prevents navigation when in demo mode
+  // ============================================
+  const handleButtonClick = (e) => {
+    if (props.isDemoMode) {
+      props.onDemoClick(e, 'Project navigation');
+    }
+    // When isDemoMode is false, the link will work normally
+  };
+
   return (
     <div id="project01">
       <div className="container">
@@ -13,9 +24,14 @@ export const Project01 = (props) => {
             <div className="about-text">
               <h2>Logic App Form Responder</h2>
               <p>{props.data ? props.data.paragraph : "loading..."}</p>
-                              <a
+              {/* ============================================
+                  DEMO MODE CONFIGURATION
+                  When isDemoMode = false, this link will navigate normally
+                  ============================================ */}
+              <a
                   href="https://forms.office.com/Pages/ResponsePage.aspx?id=n4MNJxFb8U-Jmqt9KJQ4a_gUhpDVCRVJikfVBGm0odhUQjlZV0kxTU5UVUw4Vk02MjRYWVNFSEFBRC4u"
                   className="btn btn-custom btn-lg "
+                  onClick={handleButtonClick}
                 >
                   Try It Out
                 </a>

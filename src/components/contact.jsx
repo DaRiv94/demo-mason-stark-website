@@ -19,8 +19,23 @@ export const Contact = (props) => {
   const [loading, setLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
 
+  // ============================================
+  // FORM SUBMISSION HANDLER
+  // When demo mode is disabled, this will handle actual form submission
+  // ============================================
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    // Check if in demo mode
+    if (props.isDemoMode) {
+      props.onDemoClick(e, 'Contact form submission');
+      return;
+    }
+    
+    // ============================================
+    // PRODUCTION CODE (active when isDemoMode = false)
+    // This handles the actual form submission
+    // ============================================
     setLoading(true);
     setStatusMessage('');
 

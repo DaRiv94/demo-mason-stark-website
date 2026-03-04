@@ -1,6 +1,17 @@
 import React from "react";
 
 export const Project03 = (props) => {
+  // ============================================
+  // DEMO MODE BUTTON HANDLER
+  // Prevents navigation when in demo mode
+  // ============================================
+  const handleButtonClick = (e) => {
+    if (props.isDemoMode) {
+      props.onDemoClick(e, 'Project navigation');
+    }
+    // When isDemoMode is false, the link will work normally
+  };
+
   return (
     <div id="project03">
       <div className="container">
@@ -13,11 +24,16 @@ export const Project03 = (props) => {
             <div className="about-text">
               <h2>Email Reminder Agent</h2>
               <p>{props.data ? props.data.paragraph : "loading..."}</p>
+              {/* ============================================
+                  DEMO MODE CONFIGURATION
+                  When isDemoMode = false, this link will navigate normally
+                  ============================================ */}
               <a
                 href="https://aca-ais-test2-agent-remin-fd.victoriousstone-3f422393.eastus2.azurecontainerapps.io"
                 className="btn btn-custom btn-lg "
                 target="_blank"
                 rel="noreferrer"
+                onClick={handleButtonClick}
               >
                 Try It Out
               </a>
