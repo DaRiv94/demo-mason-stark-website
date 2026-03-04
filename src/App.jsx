@@ -24,7 +24,7 @@ const App = () => {
   // Set to false to enable full functionality
   // Set to true to disable buttons and show notifications
   // ============================================
-  const [isDemoMode] = useState(false); // Demo mode meaning people can not use functionality while it is in demo mode. If I want it to work for my demos then I set demo mode to false for teh functionality to work
+  const [isDemoMode] = useState(true); // Demo mode meaning people can not use functionality while it is in demo mode. If I want it to work for my demos then I set demo mode to false for teh functionality to work
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   
@@ -41,7 +41,7 @@ const App = () => {
     if (isDemoMode) {
       event.preventDefault();
       setShowNotification(true);
-      setNotificationMessage(`This feature is disabled in demo mode. ${actionType} functionality would be available in production.`);
+      setNotificationMessage(`This feature is disabled when not being used by the author. See https://www.youtube.com/@AzureInnovationStation for demos`);
     }
   };
 
